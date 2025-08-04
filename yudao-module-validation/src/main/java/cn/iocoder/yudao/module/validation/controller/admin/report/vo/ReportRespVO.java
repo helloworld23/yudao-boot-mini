@@ -18,6 +18,11 @@ public class ReportRespVO {
     @ExcelProperty("主键")
     private Long id;
 
+    @Schema(description = "分类", example = "2")
+    @ExcelProperty(value = "分类", converter = DictConvert.class)
+    @DictFormat("validation_category") // TODO 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
+    private Integer category;
+
     @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @ExcelProperty("名字")
     private String name;

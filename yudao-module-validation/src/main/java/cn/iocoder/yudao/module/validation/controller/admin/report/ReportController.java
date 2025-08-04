@@ -1,5 +1,8 @@
 package cn.iocoder.yudao.module.validation.controller.admin.report;
 
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
+import cn.iocoder.yudao.module.system.controller.admin.dict.vo.data.DictDataSimpleRespVO;
+import cn.iocoder.yudao.module.system.dal.dataobject.dict.DictDataDO;
 import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -86,6 +89,14 @@ public class ReportController {
     public CommonResult<PageResult<ReportRespVO>> getReportPage(@Valid ReportPageReqVO pageReqVO) {
         PageResult<ReportDO> pageResult = reportService.getReportPage(pageReqVO);
         return success(BeanUtils.toBean(pageResult, ReportRespVO.class));
+    }
+
+    @GetMapping("/list")
+    @Operation(summary = "获得报表定义")
+    @PreAuthorize("@ss.hasPermission('validation:report:query')")
+    public CommonResult<List<ReportRespVO>> getReportList() {
+        List<ReportDO> list = reportService.getReportList(CommonStatusEnum.ENABLE.getStatus());
+        return success(BeanUtils.toBean(list, ReportRespVO.class));
     }
 
     @GetMapping("/export-excel")

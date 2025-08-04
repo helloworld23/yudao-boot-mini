@@ -3,6 +3,7 @@ create table `ruoyi-vue-pro`.validation_report
 (
     id          bigint auto_increment comment '主键'
         primary key,
+    category    int                                   null comment '分类',
     code        varchar(64)                           null comment '编码',
     name        varchar(255)                          not null comment '名字',
     file        varchar(255)                          null comment '文件',
@@ -16,6 +17,7 @@ create table `ruoyi-vue-pro`.validation_report
     tenant_id   bigint      default 0                 not null comment '租户编号'
 )
     comment '报表定义' collate = utf8mb4_unicode_ci;
+
 
 create table `ruoyi-vue-pro`.validation_report_definition
 (
@@ -39,7 +41,7 @@ create table `ruoyi-vue-pro`.validation_report_rules
 (
     id                          bigint auto_increment comment '主键'
         primary key,
-    name                        varchar(255)                          not null comment '规则名称',
+    name                        varchar(255)                          not null comment '名称',
     report_id                   bigint                                not null comment '报表编号',
     report_definition_id        bigint                                not null comment '字段编号',
     value_type                  int                                   not null comment '值类型',

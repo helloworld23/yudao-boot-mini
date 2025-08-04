@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.module.validation.controller.admin.reportrules.vo;
+package cn.iocoder.yudao.module.validation.controller.admin.reportdata.vo;
 
 import lombok.*;
 import java.util.*;
@@ -9,21 +9,18 @@ import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;
 
-@Schema(description = "管理后台 - 校验规则分页 Request VO")
+@Schema(description = "管理后台 - 报表数据分页 Request VO")
 @Data
-public class ReportRulesPageReqVO extends PageParam {
+public class ReportDataPageReqVO extends PageParam {
 
-    @Schema(description = "规则名称", example = "张三")
-    private String name;
-
-    @Schema(description = "报表编号", example = "31147")
+    @Schema(description = "报表", example = "821")
     private Long reportId;
 
-    @Schema(description = "字段编号", example = "15251")
-    private Long reportDefinitionId;
+    @Schema(description = "字段", example = "7872")
+    private Long columnId;
 
-    @Schema(description = "状态", example = "1")
-    private Integer status;
+    @Schema(description = "值")
+    private String value;
 
     @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)

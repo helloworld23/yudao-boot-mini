@@ -13,6 +13,9 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.FORMAT_YEAR_
 @Data
 public class ReportPageReqVO extends PageParam {
 
+    @Schema(description = "分类", example = "2")
+    private Integer category;
+
     @Schema(description = "名字", example = "芋艿")
     private String name;
 

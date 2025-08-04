@@ -27,4 +27,8 @@ public interface ReportDefinitionMapper extends BaseMapperX<ReportDefinitionDO> 
                 .orderByAsc(ReportDefinitionDO::getColumnIndex));
     }
 
+    default List<ReportDefinitionDO> selectByReportId(Long id){
+        return selectList(new LambdaQueryWrapperX<ReportDefinitionDO>()
+                .eq(ReportDefinitionDO::getReportId, id));
+    }
 }

@@ -1,6 +1,8 @@
 package cn.iocoder.yudao.module.validation.service.reportdefinition;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -87,6 +89,23 @@ public class ReportDefinitionServiceImpl implements ReportDefinitionService {
     @Override
     public PageResult<ReportDefinitionDO> getReportDefinitionPage(ReportDefinitionPageReqVO pageReqVO) {
         return reportDefinitionMapper.selectPage(pageReqVO);
+    }
+
+    @Override
+    public List<ReportDefinitionDO> getReportDefinitionList(Collection<Long> ids) {
+        if (CollUtil.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        return reportDefinitionMapper.selectList(
+                new LambdaQueryWrapper<ReportDefinitionDO>()
+                        .in(ReportDefinitionDO::getReportId, ids)
+                        .eq(ReportDefinitionDO::getStatus, CommonStatusEnum.ENABLE.getStatus())
+        );
+    }
+
+    @Override
+    public List<ReportDefinitionDO> getReportDefinitionByReportId(Long id) {
+        return reportDefinitionMapper.selectByReportId(id);
     }
 
 }

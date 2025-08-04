@@ -1,6 +1,9 @@
 package cn.iocoder.yudao.module.validation.service.reportdefinition;
 
 import java.util.*;
+
+import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
+import cn.iocoder.yudao.module.validation.dal.dataobject.report.ReportDO;
 import jakarta.validation.*;
 import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.*;
 import cn.iocoder.yudao.module.validation.dal.dataobject.reportdefinition.ReportDefinitionDO;
@@ -59,4 +62,22 @@ public interface ReportDefinitionService {
      */
     PageResult<ReportDefinitionDO> getReportDefinitionPage(ReportDefinitionPageReqVO pageReqVO);
 
+    /**
+     * 根据id获取报表定义
+     * @param ids
+     * @return
+     */
+    List<ReportDefinitionDO> getReportDefinitionList(Collection<Long> ids);
+
+    /**
+     * 获取指定编号的字段定义
+     * @param ids
+     * @return
+     */
+    default Map<Long, ReportDefinitionDO> getReportDefinitionMap(List<Long> ids) {
+        List<ReportDefinitionDO> list = getReportDefinitionList(ids);
+        return CollectionUtils.convertMap(list, ReportDefinitionDO::getId);
+    }
+
+    List<ReportDefinitionDO> getReportDefinitionByReportId(Long id);
 }

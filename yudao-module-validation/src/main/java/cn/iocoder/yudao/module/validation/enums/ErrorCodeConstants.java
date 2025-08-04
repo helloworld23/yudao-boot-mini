@@ -8,5 +8,6 @@ import cn.iocoder.yudao.framework.common.exception.ErrorCode;
 public interface ErrorCodeConstants {
     ErrorCode REPORT_NOT_EXISTS = new ErrorCode(2_001_000_001, "报表定义不存在");
     ErrorCode REPORT_DEFINITION_NOT_EXISTS = new ErrorCode(2_002_000_001, "报表表样不存在");
-    ErrorCode REPORT_RULES_NOT_EXISTS = new ErrorCode(2_003_000_001, "校验规则不存在");
+    ErrorCode REPORT_RULE_NOT_EXISTS = new ErrorCode(2_003_000_001, "校验规则不存在");
+    ErrorCode REPORT_DATA_NOT_EXISTS = new ErrorCode(2_004_000_001, "报表数据不存在");
 }

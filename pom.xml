@@ -45,6 +45,7 @@
         <lombok.version>1.18.36</lombok.version>
         <spring.boot.version>3.4.5</spring.boot.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <aviator.version>5.4.3</aviator.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

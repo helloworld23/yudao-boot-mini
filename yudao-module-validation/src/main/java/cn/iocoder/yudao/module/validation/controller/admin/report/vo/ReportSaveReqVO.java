@@ -12,6 +12,9 @@ public class ReportSaveReqVO {
     @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED, example = "15916")
     private Long id;
 
+    @Schema(description = "分类", example = "2")
+    private Integer category;
+
     @Schema(description = "名字", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @NotEmpty(message = "名字不能为空")
     private String name;

@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.validation.service.report;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import org.springframework.util.StringUtils;
@@ -99,7 +100,13 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<ReportDO> getReportList(Collection<Long> ids) {
+    public List<ReportDO> getReportList(Integer status) {
+        return reportMapper.selectList(new LambdaQueryWrapperX<ReportDO>()
+                .eq(ReportDO::getStatus, status));
+    }
+
+    @Override
+    public List<ReportDO> getReportListByIds(Collection<Long> ids) {
         if (CollUtil.isEmpty(ids)) {
             return Collections.emptyList();
         }

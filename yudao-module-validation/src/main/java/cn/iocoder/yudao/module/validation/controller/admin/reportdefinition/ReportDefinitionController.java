@@ -1,37 +1,38 @@
 package cn.iocoder.yudao.module.validation.controller.admin.reportdefinition;
 
-import cn.iocoder.yudao.module.validation.convert.ReportConvert;
-import cn.iocoder.yudao.module.validation.dal.dataobject.report.ReportDO;
-import cn.iocoder.yudao.module.validation.service.report.ReportService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import jakarta.annotation.Resource;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.security.access.prepost.PreAuthorize;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Operation;
-
-import jakarta.validation.*;
-import jakarta.servlet.http.*;
-import java.util.*;
-import java.io.IOException;
-
+import cn.iocoder.yudao.framework.apilog.core.annotation.ApiAccessLog;
+import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
+import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
-import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
-
 import cn.iocoder.yudao.framework.excel.core.util.ExcelUtils;
-
-import cn.iocoder.yudao.framework.apilog.core.annotation.ApiAccessLog;
-import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.*;
-import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
-
-import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.*;
+import cn.iocoder.yudao.module.validation.controller.admin.report.vo.ReportRespVO;
+import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.ReportDefinitionPageReqVO;
+import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.ReportDefinitionRespVO;
+import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.ReportDefinitionSaveReqVO;
+import cn.iocoder.yudao.module.validation.convert.ReportConvert;
+import cn.iocoder.yudao.module.validation.dal.dataobject.report.ReportDO;
 import cn.iocoder.yudao.module.validation.dal.dataobject.reportdefinition.ReportDefinitionDO;
+import cn.iocoder.yudao.module.validation.service.report.ReportService;
 import cn.iocoder.yudao.module.validation.service.reportdefinition.ReportDefinitionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import static cn.iocoder.yudao.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
+import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertList;
 
 /**
  * @author zhongziming
@@ -44,7 +45,7 @@ public class ReportDefinitionController {
 
     @Resource
     private ReportDefinitionService reportDefinitionService;
-    @Autowired
+    @Resource
     private ReportService reportService;
 
     @PostMapping("/create")
@@ -99,6 +100,14 @@ public class ReportDefinitionController {
                 convertList(pageResult.getList(), ReportDefinitionDO::getReportId));
         return success(new PageResult<>(ReportConvert.INSTANCE.convertList(pageResult.getList(), reportMap),
                 pageResult.getTotal()));
+    }
+
+    @GetMapping("/list")
+    @Operation(summary = "获得报表表样列表")
+    @PreAuthorize("@ss.hasPermission('validation:report-definition:query')")
+    public CommonResult<List<ReportDefinitionRespVO>> getReportDefinitionList(@RequestParam("ids") List<Long> ids) {
+        List<ReportDefinitionDO> list = reportDefinitionService.getReportDefinitionList(ids);
+        return success(BeanUtils.toBean(list, ReportDefinitionRespVO.class));
     }
 
     @GetMapping("/export-excel")

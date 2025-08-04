@@ -28,6 +28,12 @@ public class ReportDO extends BaseDO {
     @TableId
     private Long id;
     /**
+     * 分类
+     *
+     * 枚举 {@link TODO validation_category 对应的类}
+     */
+    private Integer category;
+    /**
      * 名字
      */
     private String name;

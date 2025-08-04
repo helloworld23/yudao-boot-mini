@@ -3,12 +3,10 @@ package cn.iocoder.yudao.module.validation.service.report;
 import java.util.*;
 
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
-import cn.iocoder.yudao.module.validation.dal.dataobject.reportdefinition.ReportDefinitionDO;
 import jakarta.validation.*;
 import cn.iocoder.yudao.module.validation.controller.admin.report.vo.*;
 import cn.iocoder.yudao.module.validation.dal.dataobject.report.ReportDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -69,7 +67,7 @@ public interface ReportService {
      * @param ids
      * @return
      */
-    List<ReportDO> getReportList(Collection<Long> ids);
+    List<ReportDO> getReportListByIds(Collection<Long> ids);
 
     /**
      * 获取指定编号的报表定义
@@ -77,7 +75,13 @@ public interface ReportService {
      * @return
      */
     default Map<Long, ReportDO> getReportMap(List<Long> ids) {
-        List<ReportDO> list = getReportList(ids);
+        List<ReportDO> list = getReportListByIds(ids);
         return CollectionUtils.convertMap(list, ReportDO::getId);
     }
+
+    /**
+     * 获取报表定义列表
+     * @return
+     */
+    List<ReportDO> getReportList(Integer status);
 }

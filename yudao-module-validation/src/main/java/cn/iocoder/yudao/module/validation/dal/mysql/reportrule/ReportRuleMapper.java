@@ -20,8 +20,8 @@ public interface ReportRuleMapper extends BaseMapperX<ReportRuleDO> {
     default PageResult<ReportRuleDO> selectPage(ReportRulePageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<ReportRuleDO>()
                 .eqIfPresent(ReportRuleDO::getRuleCode, reqVO.getRuleCode())
-                .likeIfPresent(ReportRuleDO::getReportName, reqVO.getReportName())
-                .likeIfPresent(ReportRuleDO::getFieldName, reqVO.getFieldName())
+                .eqIfPresent(ReportRuleDO::getReportId, reqVO.getReportId())
+                .eqIfPresent(ReportRuleDO::getFieldId, reqVO.getFieldId())
                 .betweenIfPresent(ReportRuleDO::getCreateTime, reqVO.getCreateTime())
                 .orderByDesc(ReportRuleDO::getId));
     }

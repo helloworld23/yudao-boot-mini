@@ -1,6 +1,7 @@
 package cn.iocoder.yudao.module.validation.dal.mysql.reportdata;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
@@ -26,4 +27,10 @@ public interface ReportDataMapper extends BaseMapperX<ReportDataDO> {
                 .orderByDesc(ReportDataDO::getId));
     }
 
+    default Map<Long, List<ReportDataDO>> getReportDataByReportIds(List<Long> reportIds) {
+        return selectList(new LambdaQueryWrapperX<ReportDataDO>()
+                .in(ReportDataDO::getReportId, reportIds))
+                .stream()
+                .collect(Collectors.groupingBy(ReportDataDO::getReportId));
+    }
 }

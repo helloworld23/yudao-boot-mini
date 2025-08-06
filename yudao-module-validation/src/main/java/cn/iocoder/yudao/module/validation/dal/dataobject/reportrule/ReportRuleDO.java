@@ -34,11 +34,11 @@ public class ReportRuleDO extends BaseDO {
     /**
      * 报文名称
      */
-    private String reportName;
+    private Long reportId;
     /**
      * 字段名称
      */
-    private String fieldName;
+    private Long fieldId;
     /**
      * 规则大类
      */

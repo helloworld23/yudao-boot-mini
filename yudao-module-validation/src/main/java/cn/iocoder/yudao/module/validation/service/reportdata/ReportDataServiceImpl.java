@@ -89,4 +89,9 @@ public class ReportDataServiceImpl implements ReportDataService {
         return reportDataMapper.selectPage(pageReqVO);
     }
 
+    @Override
+    public Map<Long, List<ReportDataDO>> getReportDataByReportIds(List<Long> reportIds) {
+        return reportDataMapper.getReportDataByReportIds(reportIds);
+    }
+
 }

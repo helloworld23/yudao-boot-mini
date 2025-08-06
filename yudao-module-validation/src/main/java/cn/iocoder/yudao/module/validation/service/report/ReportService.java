@@ -84,4 +84,14 @@ public interface ReportService {
      * @return
      */
     List<ReportDO> getReportList(Integer status);
+
+    /**
+     * 根据id获取名称
+     * @param aLong
+     * @return
+     */
+    default String getReportNameById(Long aLong) {
+        ReportDO reportDO = getReport(aLong);
+        return reportDO.getName();
+    }
 }

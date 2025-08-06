@@ -59,4 +59,10 @@ public interface ReportDataService {
      */
     PageResult<ReportDataDO> getReportDataPage(ReportDataPageReqVO pageReqVO);
 
+    /**
+     * 根据Ids获取报表数据
+     * @param reportIds
+     * @return
+     */
+    Map<Long, List<ReportDataDO>> getReportDataByReportIds(List<Long> reportIds);
 }

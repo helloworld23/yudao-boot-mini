@@ -59,4 +59,9 @@ public interface ReportRuleService {
      */
     PageResult<ReportRuleDO> getReportRulePage(ReportRulePageReqVO pageReqVO);
 
+    /**
+     * 根据规则进行校验
+     * @param ids
+     */
+    void validateReportRuleListByIds(List<Long> ids);
 }

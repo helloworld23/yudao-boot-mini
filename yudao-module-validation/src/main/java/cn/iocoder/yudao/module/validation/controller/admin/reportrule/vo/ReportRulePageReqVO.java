@@ -17,10 +17,10 @@ public class ReportRulePageReqVO extends PageParam {
     private String ruleCode;
 
     @Schema(description = "报文名称", example = "芋艿")
-    private String reportName;
+    private Long reportId;
 
     @Schema(description = "字段名称", example = "李四")
-    private String fieldName;
+    private Long fieldId;
 
     @Schema(description = "创建时间")
     @DateTimeFormat(pattern = FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND)

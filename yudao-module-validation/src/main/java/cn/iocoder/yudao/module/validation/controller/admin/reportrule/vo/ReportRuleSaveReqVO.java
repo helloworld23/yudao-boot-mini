@@ -18,11 +18,11 @@ public class ReportRuleSaveReqVO {
 
     @Schema(description = "报文名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @NotEmpty(message = "报文名称不能为空")
-    private String reportName;
+    private String reportId;
 
     @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
     @NotEmpty(message = "字段名称不能为空")
-    private String fieldName;
+    private String fieldId;
 
     @Schema(description = "规则大类", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "规则大类不能为空")
@@ -40,7 +40,7 @@ public class ReportRuleSaveReqVO {
     private String ruleDescription;
 
     @Schema(description = "涉及的表")
-    private String involvedTables;
+    private List<Long> involvedTables;
 
     @Schema(description = "规则实现逻辑")
     private String ruleLogic;

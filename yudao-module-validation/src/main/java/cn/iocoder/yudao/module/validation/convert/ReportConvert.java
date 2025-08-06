@@ -4,9 +4,11 @@ import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.validation.controller.admin.reportdata.vo.ReportDataRespVO;
 import cn.iocoder.yudao.module.validation.controller.admin.reportdefinition.vo.ReportDefinitionRespVO;
+import cn.iocoder.yudao.module.validation.controller.admin.reportrule.vo.ReportRuleRespVO;
 import cn.iocoder.yudao.module.validation.dal.dataobject.report.ReportDO;
 import cn.iocoder.yudao.module.validation.dal.dataobject.reportdata.ReportDataDO;
 import cn.iocoder.yudao.module.validation.dal.dataobject.reportdefinition.ReportDefinitionDO;
+import cn.iocoder.yudao.module.validation.dal.dataobject.reportrule.ReportRuleDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -37,6 +39,14 @@ public interface ReportConvert {
 
     default ReportDataRespVO convertData(ReportDataDO def, ReportDO report) {
         ReportDataRespVO resp = BeanUtils.toBean(def, ReportDataRespVO.class);
+        if (report != null) {
+            resp.setReportName(report.getName());
+        }
+        return resp;
+    }
+
+    default ReportRuleRespVO convertRule(ReportRuleDO def, ReportDO report) {
+        ReportRuleRespVO resp = BeanUtils.toBean(def, ReportRuleRespVO.class);
         if (report != null) {
             resp.setReportName(report.getName());
         }

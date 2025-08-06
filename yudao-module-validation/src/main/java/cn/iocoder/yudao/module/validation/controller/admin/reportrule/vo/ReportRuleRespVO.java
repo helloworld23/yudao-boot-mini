@@ -23,10 +23,14 @@ public class ReportRuleRespVO {
     private String ruleCode;
 
     @Schema(description = "报文名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    private Long reportId;
+
     @ExcelProperty("报文名称")
     private String reportName;
 
     @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "李四")
+    private Long fieldId;
+
     @ExcelProperty("字段名称")
     private String fieldName;
 
@@ -48,7 +52,7 @@ public class ReportRuleRespVO {
 
     @Schema(description = "涉及的表")
     @ExcelProperty("涉及的表")
-    private String involvedTables;
+    private List<Long> involvedTables;
 
     @Schema(description = "规则实现逻辑")
     @ExcelProperty("规则实现逻辑")
